@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrapods Pro - ব্লুটুথ ৫.৩ হেডফোন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #2e7d32;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .product-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .product-images img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-images img:hover {
+            transform: scale(1.02);
+        }
+        
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .price-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .old-price {
+            color: #d32f2f;
+            text-decoration: line-through;
+            font-size: 1.5rem;
+            margin-right: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes crossOut {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        .old-price::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #d32f2f;
+            animation: crossOut 1s ease-in-out forwards;
+        }
+        
+        .current-price {
+            color: #2e7d32;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .features {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .features h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .order-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .order-section h2 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+        
+        .btn-order {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-order:hover {
+            background-color: #1b5e20;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+        
+        /* পপআপ স্টাইল */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50px);
+            transition: transform 0.5s ease;
+        }
+        
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+        
+        .popup-content h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .popup-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .btn-close {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-close:hover {
+            background-color: #1b5e20;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2e7d32;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .product-showcase {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .popup-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ultrapods Pro - ব্লুটুথ ৫.৩ হেডফোন</h1>
+            <p class="tagline">সুপার ফাস্ট অডিও, স্টেবল কানেকশন! 🎧⚡</p>
+        </header>
+        
+        <div class="product-showcase">
+            <div class="product-images">
+                <a href="https://ibb.co/39C4hCyV"><img src="https://i.ibb.co/RkDYHDpt/IMG-20250831-WA0001.jpg" alt="Ultrapods Pro Black"></a>
+                <a href="https://ibb.co/Q7TRs11b"><img src="https://i.ibb.co/NgJPwHHV/IMG-20250831-WA0003.jpg" alt="Ultrapods Pro White"></a>
+                <a href="https://ibb.co/G3tSz2pf"><img src="https://i.ibb.co/QjCwyNQ7/IMG-20250831-WA0002.jpg" alt="Ultrapods Pro Pink"></a>
+            </div>
+            
+            <div class="product-details">
+                <div class="price-section">
+
+                    <span class="current-price">দাম মাত্র ৩৫০ টাকা</span>
+                </div>
+                
+                <div class="features">
+                    <h2>✨ প্রোডাক্টের বৈশিষ্ট্য</h2>
+                    <ul class="feature-list">
+                        <li><span class="feature-icon">💎</span> ট্রান্সপারেন্ট ডিজাইন: আধুনিক ও ইউনিক লুক</li>
+                        <li><span class="feature-icon">🔋</span> ডিজিটাল ডিসপ্লে: ব্যাটারি স্ট্যাটাস এক নজরে দেখুন</li>
+                        <li><span class="feature-icon">🏃‍♂️</span> অ্যাডভেঞ্চার ও ফিটনেস রেডি: হালকা, আরামদায়ক এবং শক্তিশালী ডিজাইন</li>
+                        <li><span class="feature-icon">🚀</span> ব্লুটুথ ৫.৩ দিয়ে হাই-স্পিড ট্রান্সমিশন</li>
+                        <li><span class="feature-icon">🎶</span> ক্লিয়ার সাউন্ড ও স্টেবল কানেকশন</li>
+                    </ul>
+                </div>
+                
+                <div class="features">
+                    <h2>📦 বক্স কন্টেন্ট</h2>
+                    <ul class="feature-list">
+                        <li>Ultrapods Pro 🎧</li>
+                        <li>ফাস্ট চার্জিং কেবল ⚡</li>
+                        <li>৩টি স্টাইলিশ কালার: আপনার পছন্দমতো রঙ বেছে নিন!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="order-section">
+            <h2>অর্ডার করতে নিচের ফর্মটি পূরণ করুন</h2>
+            <form id="order-form" action="https://formspree.io/f/mblaaggp" method="POST">
+                <div class="form-group">
+                    <label for="name">নাম (Name)</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">ফোন নম্বর (Phone)</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">ঠিকানা (Address)</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">ইমেইল (E-mail)</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="color">রং নির্বাচন করুন (Colour)</label>
+                    <select id="color" name="color" required>
+                        <option value="">রং পছন্দ করুন</option>
+                        <option value="black">কালো (Black)</option>
+                        <option value="white">সাদা (White)</option>
+                        <option value="pink">গোলাপী (Pink)</option>
+                    </select>
+                </div>
+                
+                <!-- ফর্মসপ্রি অতিরিক্ত ডেটা -->
+                <input type="hidden" name="_subject" value="নতুন অর্ডার: Ultrapods Pro">
+                <input type="hidden" name="_language" value="bn">
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <button type="submit" class="btn-order" id="submit-btn">অর্ডার সম্পন্ন করুন 🛒</button>
+                
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>আপনার অর্ডারটি প্রক্রিয়া করা হচ্ছে...</p>
+                </div>
+            </form>
+        </div>
+        
+        <footer>
+            <p>🎧 Ultrapods Pro 5.3 | ট্রান্সপারেন্ট ব্লুটুথ হেডফোন ⚡ হাই-স্পিড অডিও + ডিজিটাল ডিসপ্লে 🔋 (৩ কালার) 🌈</p>
+        </footer>
+    </div>
+    
+    <!-- পপআপ -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <h2 id="popup-title">ধন্যবাদ!</h2>
+            <p id="popup-message">অর্ডার সম্পন্ন করার জন্য আপনাকে ধন্যবাদ। আমাদের একজন সহকর্মী কিছুক্ষণের মধ্যে আপনার সঙ্গে যোগাযোগ করবে।</p>
+            <button class="btn-close" id="close-popup">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderForm = document.getElementById('order-form');
+            const popup = document.getElementById('popup');
+            const closePopup = document.getElementById('close-popup');
+            const loading = document.getElementById('loading');
+            const submitBtn = document.getElementById('submit-btn');
+            const popupTitle = document.getElementById('popup-title');
+            const popupMessage = document.getElementById('popup-message');
+            
+            // ফর্ম সাবমিট করা হলে
+            orderForm.addEventListener('submit', function(e) {
+                // ফর্ম ভ্যালিডেশন
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const address = document.getElementById('address').value;
+                const email = document.getElementById('email').value;
+                const color = document.getElementById('color').value;
+                
+                if (name && phone && address && email && color) {
+                    // লোডিং দেখান
+                    loading.style.display = 'block';
+                    submitBtn.disabled = true;
+                    
+                    // AJAX এর মাধ্যমে ফর্ম সাবমিট করি
+                    e.preventDefault();
+                    
+                    // Formspree এ AJAX রিকোয়েস্ট
+                    const formData = new FormData(orderForm);
+                    
+                    fetch(orderForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // সাফল্য পপআপ দেখান
+                            popupTitle.textContent = "Done";
+                            popupMessage.textContent = "অর্ডার সম্পন্ন করার জন্য আপনাকে ধন্যবাদ। আমাদের একজন সহকর্মী কিছুক্ষণের মধ্যে আপনার সঙ্গে যোগাযোগ করবে।";
+                            popup.classList.add('active');
+                            
+                            // ফর্ম রিসেট
+                            orderForm.reset();
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        // ত্রুটি পপআপ দেখান
+                        popupTitle.textContent = "ত্রুটি!";
+                        popupMessage.textContent = "দুঃখিত, আপনার অর্ডার জমা দেওয়া একটি সমস্যাে ।";
+                        popup.classList.add('active');
+                        console.error('Error:', error);
+                    })
+                    .finally(() => {
+                        // লোডিং লুকান
+                        loading.style.display = 'none';
+                        submitBtn.disabled = false;
+                    });
+                } else {
+                    e.preventDefault();
+                    alert('দয়া করে সকল তথ্য সঠিকভাবে পূরণ করুন।');
+                }
+            });
+            
+            // পপআপ বন্ধ করা
+            closePopup.addEventListener('click', function() {
+                popup.classList.remove('active');
+            });
+            
+            // পপআপের বাইরে ক্লিক করলে বন্ধ করা
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
